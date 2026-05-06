@@ -1,6 +1,6 @@
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { profile } from "@/data/profile";
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 
 export default function ContactSection() {
   return (
@@ -21,15 +21,15 @@ export default function ContactSection() {
           </div>
 
           <div className="flex flex-col items-center p-6 rounded-xl border border-neutral-800 bg-black/60 backdrop-blur-sm">
-            <FaMapMarkerAlt className="text-2xl text-green-400 mb-3" />
-            <h3 className="text-white font-medium mb-1">位置</h3>
-            <p className="text-neutral-400 text-sm">{profile.contact.location}</p>
+            <FaPhone className="text-2xl text-green-400 mb-3" />
+            <h3 className="text-white font-medium mb-1">电话</h3>
+            <p className="text-neutral-400 text-sm">{profile.contact.phone}</p>
           </div>
 
           <div className="flex flex-col items-center p-6 rounded-xl border border-neutral-800 bg-black/60 backdrop-blur-sm">
-            <FaGithub className="text-2xl text-purple-400 mb-3" />
-            <h3 className="text-white font-medium mb-1">GitHub</h3>
-            <p className="text-neutral-400 text-sm">{profile.contact.github}</p>
+            <FaMapMarkerAlt className="text-2xl text-purple-400 mb-3" />
+            <h3 className="text-white font-medium mb-1">期望城市</h3>
+            <p className="text-neutral-400 text-sm">{profile.contact.location}</p>
           </div>
         </div>
 

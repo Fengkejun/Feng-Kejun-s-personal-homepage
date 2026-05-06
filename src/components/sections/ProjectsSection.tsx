@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import { projects } from "@/data/profile";
 
-const categories = ["全部", "前端", "后端", "全栈", "研究", "开源"];
+const categories = ["全部", "桌面端", "小程序", "后台管理", "鸿蒙", "Flutter", "React"];
 
 export default function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState("全部");

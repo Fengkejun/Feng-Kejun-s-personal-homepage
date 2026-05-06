@@ -1,7 +1,9 @@
+import avatarImg from "@/assets/avatar.jpg";
+
 export const profile = {
   name: "冯克军",
   role: "前端开发工程师",
-  avatar: "https://api.dicebear.com/7.x/notionists/svg?seed=FengKejun&backgroundColor=0ea5e9",
+  avatar: avatarImg,
   tagline: "用心写好每一行代码，用技术创造价值",
   roles: ["前端开发工程师", "Vue3/React开发者", "跨平台开发者", "鸿蒙开发者"],
   bio: "1年前端开发经验，熟练掌握 Vue3/React/TypeScript 技术栈，具备从0到1构建桌面端、移动端、小程序、大屏可视化等多端应用的能力。熟悉 uni-app 跨平台开发、Tauri 桌面端方案、Flutter/鸿蒙应用开发。善于运用 AI 编程工具提升研发效能，注重代码质量与用户体验。",

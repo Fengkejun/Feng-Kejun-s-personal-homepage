@@ -81,7 +81,7 @@ export const projects = [
     id: 5,
     title: "聚爱优选（鸿蒙应用）",
     description: "基于鸿蒙 ArkUI ComponentV2 开发的购物 APP，实现手机/平板/2in1 一多适配，集成华为账号登录、支付宝支付、语音识别、地图导航等功能。",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
     category: "鸿蒙",
     tags: ["ArkTS", "ArkUI", "鸿蒙", "Rcp", "华为账号服务"],
     link: "#",

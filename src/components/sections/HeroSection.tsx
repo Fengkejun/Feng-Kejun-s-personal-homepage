@@ -1,6 +1,8 @@
-import { Spotlight } from "@/components/ui/spotlight";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { FlipWords } from "@/components/ui/flip-words";
+import { SplitText } from "@/components/ui/split-text";
+import { GradientText } from "@/components/ui/gradient-text";
 import { profile } from "@/data/profile";
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
 
@@ -14,11 +16,14 @@ const iconMap: Record<string, React.ReactNode> = {
 export default function HeroSection() {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      <div>
-        <Spotlight className="-top-40 left-0 md:-top-20 md:left-60" fill="white" />
-      </div>
+      <AuroraBackground
+        className="absolute inset-0"
+        showRadialGradient={true}
+      >
+        <div />
+      </AuroraBackground>
 
-      <div className="absolute inset-0 bg-black [background:radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-900 via-black to-black" />
+      <div className="absolute inset-0 bg-black/60" />
 
       <div className="relative z-10 flex flex-col items-center justify-center px-4">
         <img
@@ -31,12 +36,19 @@ export default function HeroSection() {
           {profile.role}
         </h2>
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center text-white mb-6">
-          你好，我是{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-            {profile.name}
-          </span>
-        </h1>
+        <SplitText
+          text="你好，我是"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-center text-white mb-6"
+          delay={50}
+        />
+
+        <GradientText
+          colors={["#3b82f6", "#8b5cf6", "#06b6d4", "#3b82f6"]}
+          animationSpeed={6}
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+        >
+          {profile.name}
+        </GradientText>
 
         <div className="text-xl md:text-2xl text-neutral-300 mb-4 h-10 flex items-center">
           <span>一名 </span>

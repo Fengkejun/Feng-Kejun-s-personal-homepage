@@ -1,10 +1,27 @@
 import { profile } from "@/data/profile";
+import { Dock } from "@/components/ui/dock";
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
+
+const iconMap: Record<string, React.ReactNode> = {
+  github: <FaGithub />,
+  linkedin: <FaLinkedin />,
+  twitter: <FaTwitter />,
+  email: <FaEnvelope />,
+};
 
 export default function FooterSection() {
+  const dockItems = profile.socials.map((social) => ({
+    icon: iconMap[social.icon],
+    label: social.name,
+    href: social.url,
+  }));
+
   return (
     <footer className="border-t border-neutral-800 py-10 px-4">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="text-center md:text-left">
+      <div className="max-w-7xl mx-auto flex flex-col items-center gap-6">
+        <Dock items={dockItems} />
+
+        <div className="text-center">
           <p className="text-white font-semibold">{profile.name}</p>
           <p className="text-neutral-500 text-sm">{profile.role}</p>
         </div>

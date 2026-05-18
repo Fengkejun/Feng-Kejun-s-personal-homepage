@@ -30,6 +30,31 @@
       transform: translate(calc(-50% - 0.5rem));
     }
   }
+
+  --animate-gradient: gradient 8s linear infinite;
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  --animate-star-border-spin: star-border-spin 5s linear infinite;
+
+  @keyframes star-border-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 html {

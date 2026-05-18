@@ -4,8 +4,8 @@ export const SplitText = ({
   text,
   className = "",
   delay = 30,
-  animationFrom = { opacity: 0, transform: "translateY(20px)" },
-  animationTo = { opacity: 1, transform: "translateY(0)" },
+  animationFrom = { opacity: "0", transform: "translateY(20px)" },
+  animationTo = { opacity: "1", transform: "translateY(0)" },
   threshold = 0.2,
   rootMargin = "0px",
 }: {

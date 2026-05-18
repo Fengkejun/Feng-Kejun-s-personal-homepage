@@ -88,7 +88,7 @@ export const Particles = ({
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
 
-      particlesRef.current.forEach((p, i) => {
+      particlesRef.current.forEach((p) => {
         const edgeDistX = Math.min(p.x, canvas.width / dpr - p.x);
         const edgeDistY = Math.min(p.y, canvas.height / dpr - p.y);
         const edgeFade = Math.min(edgeDistX, edgeDistY, 80) / 80;

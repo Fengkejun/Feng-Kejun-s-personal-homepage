@@ -11,6 +11,7 @@ interface SectionVideoBackgroundProps {
   autoPlay?: boolean;
   scrollZoom?: boolean;
   zoom?: number;
+  lazy?: boolean;
 }
 
 export default function SectionVideoBackground({
@@ -20,11 +21,31 @@ export default function SectionVideoBackground({
   autoPlay = false,
   scrollZoom = false,
   zoom = 1,
+  lazy = true,
 }: SectionVideoBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<any>(null);
   const [videoReady, setVideoReady] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(!lazy || autoPlay);
+
+  // ── Lazy: start loading when container is near viewport ──
+  useEffect(() => {
+    if (shouldLoad || !containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [shouldLoad]);
 
   // ── Scroll-zoom ──
   useEffect(() => {
@@ -55,9 +76,7 @@ export default function SectionVideoBackground({
     const video = videoRef.current;
     if (!video || !poster) return;
 
-    // "playing" = video has started and is actively rendering frames
     const onPlaying = () => {
-      // Small delay to ensure the frame is painted on screen
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setVideoReady(true);
@@ -71,6 +90,7 @@ export default function SectionVideoBackground({
 
   // ── Load video ──
   useEffect(() => {
+    if (!shouldLoad) return;
     const video = videoRef.current;
     if (!video) return;
 
@@ -100,7 +120,7 @@ export default function SectionVideoBackground({
       }
     } else {
       video.src = src;
-      video.preload = "auto";
+      video.preload = "metadata";
       if (autoPlay) video.play().catch(() => {});
     }
 
@@ -110,11 +130,11 @@ export default function SectionVideoBackground({
         hlsRef.current = null;
       }
     };
-  }, [autoPlay, src]);
+  }, [autoPlay, src, shouldLoad]);
 
   // ── IntersectionObserver: play/pause ──
   useEffect(() => {
-    if (autoPlay) return;
+    if (autoPlay || !shouldLoad) return;
     const video = videoRef.current;
     if (!video) return;
 
@@ -131,7 +151,7 @@ export default function SectionVideoBackground({
 
     observer.observe(video);
     return () => observer.disconnect();
-  }, [autoPlay]);
+  }, [autoPlay, shouldLoad]);
 
   return (
     <div
@@ -146,7 +166,6 @@ export default function SectionVideoBackground({
             backgroundImage: `url(${poster})`,
             opacity: videoReady ? 0 : 1,
             transition: "opacity 0.8s ease-in-out",
-            // Keep poster interactive until fully hidden
             pointerEvents: videoReady ? "none" : "auto",
           }}
         />
@@ -157,7 +176,7 @@ export default function SectionVideoBackground({
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         className="section-video absolute inset-0 w-full h-full object-cover will-change-transform"
         style={{ transform: zoom > 1 ? `scale(${zoom})` : undefined }}
       />

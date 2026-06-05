@@ -218,7 +218,7 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" className="py-28 px-4 relative overflow-hidden">
-      <SectionVideoBackground src={VIDEO_SRC} scrollZoom />
+      <SectionVideoBackground src={VIDEO_SRC} poster="/posters/projects.jpg" scrollZoom />
       <div className="max-w-7xl mx-auto relative z-10">
         <h2
           className="section-heading text-3xl md:text-5xl font-bold text-center tracking-tight"

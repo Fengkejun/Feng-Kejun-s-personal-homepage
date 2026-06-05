@@ -167,7 +167,7 @@ export default function HomePage() {
 
       {/* About + TechStack: shared video background */}
       <div className="relative overflow-hidden">
-        <SectionVideoBackground src={VIDEO_ABOUT_TECH} scrollZoom />
+        <SectionVideoBackground src={VIDEO_ABOUT_TECH} poster="/posters/about-tech.jpg" scrollZoom />
         <div className="relative z-10">
           <AboutSection />
           <TechStackSection />
@@ -178,7 +178,7 @@ export default function HomePage() {
 
       {/* Notes + Contact: shared video background */}
       <div className="relative overflow-hidden">
-        <SectionVideoBackground src={VIDEO_NOTES_CONTACT} scrollZoom />
+        <SectionVideoBackground src={VIDEO_NOTES_CONTACT} poster="/posters/notes-contact.jpg" scrollZoom />
         <div className="relative z-10">
           <NotesAndBookmarksSection />
           <ContactSection />

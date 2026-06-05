@@ -1,65 +1,147 @@
-import { BackgroundBeams } from "@/components/ui/background-beams";
-import { GlareHover } from "@/components/ui/glare-hover";
-import { GradientText } from "@/components/ui/gradient-text";
+import { useState, useRef, useEffect } from "react";
+import gsap from "gsap";
 import { profile } from "@/data/profile";
-import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaWeixin,
+} from "react-icons/fa";
+
+const WECHAT_QR = "/Feng-Kejun-s-personal-homepage/wechat-qr.png";
+
+interface ContactCardProps {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  color: string;
+  isImage?: boolean;
+}
+
+function ContactCard({ icon, label, value, color, isImage }: ContactCardProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const valueRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!contentRef.current) return;
+
+    if (isOpen) {
+      gsap.fromTo(
+        contentRef.current,
+        { height: 0, opacity: 0 },
+        { height: "auto", opacity: 1, duration: 0.5, ease: "power3.out" }
+      );
+      if (valueRef.current) {
+        gsap.fromTo(
+          valueRef.current,
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.4, delay: 0.15, ease: "power2.out" }
+        );
+      }
+    } else {
+      gsap.to(contentRef.current, {
+        height: 0,
+        opacity: 0,
+        duration: 0.35,
+        ease: "power2.in",
+      });
+    }
+  }, [isOpen]);
+
+  return (
+    <div
+      onClick={() => setIsOpen(!isOpen)}
+      className="video-card p-6 cursor-pointer group"
+    >
+      <div className="flex flex-col items-center">
+        <div
+          className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+          style={{ background: `${color}15`, border: `1px solid ${color}30` }}
+        >
+          <span className="text-2xl" style={{ color }}>
+            {icon}
+          </span>
+        </div>
+        <h3 className="text-white font-medium text-sm mb-1">{label}</h3>
+        <span className="text-white/40 text-xs">
+          {isOpen ? "点击收起" : "点击查看详情"}
+        </span>
+      </div>
+
+      {/* Revealed content */}
+      <div
+        ref={contentRef}
+        className="overflow-hidden"
+        style={{ height: 0, opacity: 0 }}
+      >
+        <div ref={valueRef} className="pt-4 mt-4 border-t border-white/[0.06]">
+          {isImage ? (
+            <img
+              src={value}
+              alt="微信二维码"
+              className="w-40 h-40 mx-auto rounded-xl object-cover border border-white/10"
+            />
+          ) : (
+            <p className="text-white/80 text-sm text-center break-all">
+              {value}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ContactSection() {
+  const cards: ContactCardProps[] = [
+    {
+      icon: <FaEnvelope />,
+      label: "邮箱",
+      value: profile.contact.email,
+      color: "#60a5fa",
+    },
+    {
+      icon: <FaPhone />,
+      label: "电话",
+      value: profile.contact.phone,
+      color: "#4ade80",
+    },
+    {
+      icon: <FaWeixin />,
+      label: "微信",
+      value: WECHAT_QR,
+      color: "#22c55e",
+      isImage: true,
+    },
+    {
+      icon: <FaMapMarkerAlt />,
+      label: "期望城市",
+      value: profile.contact.location,
+      color: "#a78bfa",
+    },
+  ];
+
   return (
-    <section id="contact" className="relative py-20 px-4 overflow-hidden">
-      <div className="max-w-4xl mx-auto relative z-10">
-        <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
-          <GradientText colors={["#3b82f6", "#8b5cf6", "#06b6d4", "#3b82f6"]} animationSpeed={6}>
+    <section id="contact" className="relative py-20 px-4">
+      <div className="max-w-5xl mx-auto relative z-10">
+      <h2
+          className="section-heading text-5xl md:text-5xl font-bold text-center mb-12 tracking-tight"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
             联系我
-          </GradientText>
+         
         </h2>
-        <p className="text-neutral-400 text-center max-w-2xl mx-auto mb-16 text-sm md:text-base">
+        <p className="text-white/60 text-center max-w-2xl mx-auto mb-16 text-lg md:text-xl">
           期待与你交流合作，一起创造更优秀的技术产品
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <GlareHover
-            background="#0a0a0a"
-            borderColor="rgba(59, 130, 246, 0.15)"
-            glareColor="rgba(59, 130, 246, 0.08)"
-            className="p-6"
-          >
-            <div className="flex flex-col items-center">
-              <FaEnvelope className="text-2xl text-blue-400 mb-3" />
-              <h3 className="text-white font-medium mb-1">邮箱</h3>
-              <p className="text-neutral-400 text-sm">{profile.contact.email}</p>
-            </div>
-          </GlareHover>
-
-          <GlareHover
-            background="#0a0a0a"
-            borderColor="rgba(34, 197, 94, 0.15)"
-            glareColor="rgba(34, 197, 94, 0.08)"
-            className="p-6"
-          >
-            <div className="flex flex-col items-center">
-              <FaPhone className="text-2xl text-green-400 mb-3" />
-              <h3 className="text-white font-medium mb-1">电话</h3>
-              <p className="text-neutral-400 text-sm">{profile.contact.phone}</p>
-            </div>
-          </GlareHover>
-
-          <GlareHover
-            background="#0a0a0a"
-            borderColor="rgba(168, 85, 247, 0.15)"
-            glareColor="rgba(168, 85, 247, 0.08)"
-            className="p-6"
-          >
-            <div className="flex flex-col items-center">
-              <FaMapMarkerAlt className="text-2xl text-purple-400 mb-3" />
-              <h3 className="text-white font-medium mb-1">期望城市</h3>
-              <p className="text-neutral-400 text-sm">{profile.contact.location}</p>
-            </div>
-          </GlareHover>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {cards.map((card) => (
+            <ContactCard key={card.label} {...card} />
+          ))}
         </div>
       </div>
-
-      <BackgroundBeams className="opacity-30" />
     </section>
   );
 }

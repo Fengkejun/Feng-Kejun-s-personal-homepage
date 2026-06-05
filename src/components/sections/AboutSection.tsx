@@ -1,76 +1,44 @@
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-import { CountUp } from "@/components/ui/count-up";
-import { SplitText } from "@/components/ui/split-text";
-import { GradientText } from "@/components/ui/gradient-text";
-import { aboutItems, profile } from "@/data/profile";
-import {
-  IconCode,
-  IconHeart,
-  IconUsers,
-  IconBulb,
-} from "@tabler/icons-react";
+import RotatingMotto from "@/components/ui/RotatingMotto";
 
-const icons = [
-  <IconCode className="h-4 w-4 text-blue-400" />,
-  <IconHeart className="h-4 w-4 text-red-400" />,
-  <IconUsers className="h-4 w-4 text-green-400" />,
-  <IconBulb className="h-4 w-4 text-yellow-400" />,
-];
-
-const stats = [
-  { label: "年经验", value: 1, suffix: "+" },
-  { label: "技术栈", value: 8, suffix: "+" },
-  { label: "项目", value: 10, suffix: "+" },
-  { label: "证书", value: 3, suffix: "" },
+const ABOUT_MOTTOS = [
+  "Stay hungry, stay foolish.",
+  "学而不思则罔，思而不学则殆。",
+  "Every expert was once a beginner.",
+  "The journey of a thousand miles begins with a single step.",
+  "用心写好每一行代码。",
+  "Growth happens outside your comfort zone.",
+  "代码改变世界，学习成就未来。",
 ];
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
-          <GradientText colors={["#3b82f6", "#8b5cf6", "#06b6d4", "#3b82f6"]} animationSpeed={6}>
-            关于我
-          </GradientText>
+    <section id="about" className="py-28 px-4 relative">
+      <div className="max-w-3xl mx-auto relative z-10">
+        <h2
+          className="section-heading text-3xl md:text-4xl font-bold text-center tracking-tight"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          关于我
         </h2>
-        <div className="max-w-2xl mx-auto mb-12 text-sm md:text-base text-center">
-          <SplitText
-            text={profile.bio}
-            className="text-neutral-400"
-            delay={15}
-            threshold={0.3}
-          />
-        </div>
+        <RotatingMotto mottos={ABOUT_MOTTOS} interval={5000} className="mb-12" />
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-16">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="flex flex-col items-center p-5 rounded-xl border border-neutral-800 bg-neutral-950 hover:border-blue-500/30 transition-colors"
-            >
-              <CountUp
-                target={stat.value}
-                suffix={stat.suffix}
-                className="text-3xl md:text-4xl font-bold text-white"
-              />
-              <span className="text-xs md:text-sm text-neutral-400 mt-1">
-                {stat.label}
-              </span>
-            </div>
-          ))}
+        <div className="glass-card rounded-2xl p-8 md:p-10">
+          <div className="space-y-5 text-white/80 text-[15px] leading-relaxed">
+            <p data-card>
+              我是一名充满热情的前端开发工程师，拥有 1+ 年的 Web 开发经验。
+              擅长使用 Vue3、React、TypeScript 等现代化技术栈构建高性能、可扩展的应用程序。
+            </p>
+            <p data-card>
+              在前端领域，我熟悉 Vue3 + TypeScript + Pinia 全家桶和 React + Hooks + Zustand 技术栈，
+              熟悉 uni-app 跨平台开发、Tauri 桌面端方案、Flutter 和鸿蒙应用开发。
+              具备从 0 到 1 构建桌面端、移动端、小程序、大屏可视化等多端应用的能力。
+            </p>
+            <p data-card>
+              我热衷于学习新技术，善于运用 AI 编程工具提升研发效能，注重代码质量与用户体验。
+              同时持有 HarmonyOS 应用开发者高级认证、计算机程序设计员三级等证书。
+            </p>
+          </div>
         </div>
-
-        <BentoGrid className="max-w-4xl mx-auto">
-          {aboutItems.map((item, i) => (
-            <BentoGridItem
-              key={i}
-              title={item.title}
-              description={item.description}
-              icon={icons[i]}
-              className={item.className}
-            />
-          ))}
-        </BentoGrid>
       </div>
     </section>
   );

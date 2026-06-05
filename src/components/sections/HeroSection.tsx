@@ -1,105 +1,125 @@
-import { AuroraBackground } from "@/components/ui/aurora-background";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-import { FlipWords } from "@/components/ui/flip-words";
-import { SplitText } from "@/components/ui/split-text";
-import { GradientText } from "@/components/ui/gradient-text";
 import { profile } from "@/data/profile";
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
+import SectionVideoBackground from "@/components/ui/SectionVideoBackground";
 
-const iconMap: Record<string, React.ReactNode> = {
-  github: <FaGithub />,
-  linkedin: <FaLinkedin />,
-  twitter: <FaTwitter />,
-  email: <FaEnvelope />,
-};
+const HERO_VIDEO = "/Feng-Kejun-s-personal-homepage/hero-bg.mp4";
+
+const NAV_LINKS = [
+  { label: "首页", href: "#", active: true },
+  { label: "项目", href: "#projects" },
+  { label: "关于", href: "#about" },
+  { label: "笔记", href: "#notes" },
+  { label: "联系", href: "#contact" },
+];
 
 export default function HeroSection() {
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      <AuroraBackground
-        className="absolute inset-0"
-        showRadialGradient={true}
-      >
-        <div />
-      </AuroraBackground>
+    <section className="relative min-h-screen w-full overflow-hidden bg-background">
+      {/* ── Background Video (HLS stream) ── */}
+      <SectionVideoBackground src={HERO_VIDEO} className="z-0" autoPlay />
 
-      <div className="absolute inset-0 bg-black/60" />
-
-      <div className="relative z-10 flex flex-col items-center justify-center px-4">
-        <img
-          src={profile.avatar}
-          alt={profile.name}
-          className="w-28 h-28 md:w-36 md:h-36 rounded-full border-2 border-white/20 mb-8 shadow-lg shadow-blue-500/20"
-        />
-
-        <h2 className="text-xs md:text-sm uppercase tracking-[0.2em] text-blue-400 mb-4">
-          {profile.role}
-        </h2>
-
-        <SplitText
-          text="你好，我是"
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-center text-white mb-6"
-          delay={50}
-        />
-
-        <GradientText
-          colors={["#3b82f6", "#8b5cf6", "#06b6d4", "#3b82f6"]}
-          animationSpeed={6}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+      {/* ── Navigation ── */}
+      <nav className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
+        <a
+          href="#"
+          className="text-3xl tracking-tight text-foreground"
+          style={{ fontFamily: "var(--font-display)" }}
         >
           {profile.name}
-        </GradientText>
+        </a>
 
-        <div className="text-xl md:text-2xl text-neutral-300 mb-4 h-10 flex items-center">
-          <span>一名 </span>
-          <FlipWords
-            words={profile.roles}
-            className="text-blue-400 font-semibold"
-          />
-        </div>
-
-        <TextGenerateEffect
-          words={profile.tagline}
-          className="text-sm md:text-lg text-neutral-400 max-w-xl text-center mb-10"
-        />
-
-        <div className="flex gap-4">
-          {profile.socials.map((social) => (
+        <div className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map((link) => (
             <a
-              key={social.name}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative p-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50 hover:bg-blue-500/10 hover:shadow-lg hover:shadow-blue-500/20"
-              title={social.name}
+              key={link.label}
+              href={link.href}
+              className={`text-sm transition-colors duration-200 ${
+                link.active
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
-              <span className="text-xl text-neutral-400 group-hover:text-blue-400 transition-colors">
-                {iconMap[social.icon]}
-              </span>
+              {link.label}
             </a>
           ))}
         </div>
 
         <a
-          href="#about"
-          className="absolute bottom-10 animate-bounce text-neutral-500 hover:text-white transition-colors"
+          href="#projects"
+          className="liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground hover:scale-[1.03] transition-transform duration-200"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
+          查看项目
         </a>
+      </nav>
+
+      {/* ── Hero Content ── */}
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 pt-32 pb-40 py-[90px]">
+        {/* Avatar */}
+        <img
+          src={profile.avatar}
+          alt={profile.name}
+          className="w-24 h-24 md:w-28 md:h-28 rounded-full border border-white/10 shadow-2xl mb-8 animate-fade-rise"
+        />
+
+        {/* Role badge */}
+        <span className="text-muted-foreground text-sm tracking-wider uppercase mb-6 animate-fade-rise">
+          {profile.role}
+        </span>
+
+        {/* Headline */}
+        <h1
+          className="text-5xl sm:text-7xl md:text-8xl font-normal leading-[0.95] tracking-[-2.46px] max-w-7xl animate-fade-rise"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          用心写好
+          <em className="not-italic text-muted-foreground">每一行代码</em>
+          <br className="hidden sm:block" />
+          用技术
+          <em className="not-italic text-muted-foreground">创造价值</em>
+        </h1>
+
+        {/* Bio */}
+        <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mt-8 leading-relaxed animate-fade-rise-delay">
+          {profile.bio}
+        </p>
+
+        {/* Roles */}
+        <div className="flex flex-wrap justify-center gap-3 mt-8 animate-fade-rise-delay">
+          {profile.roles.map((role) => (
+            <span
+              key={role}
+              className="liquid-glass rounded-full px-5 py-1.5 text-sm text-muted-foreground"
+            >
+              {role}
+            </span>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <a
+          href="#projects"
+          className="liquid-glass rounded-full px-14 py-5 text-base text-foreground mt-12 hover:scale-[1.03] cursor-pointer transition-transform duration-200 animate-fade-rise-delay-2"
+        >
+          查看我的项目
+        </a>
+
+        {/* Social links */}
+        <div className="flex items-center gap-5 mt-8 animate-fade-rise-delay-2">
+          {profile.socials.map((s) => (
+            <a
+              key={s.name}
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground text-sm hover:text-foreground transition-colors duration-200"
+            >
+              {s.name}
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 z-[5] bg-gradient-to-t from-background to-transparent pointer-events-none" />
+    </section>
   );
 }

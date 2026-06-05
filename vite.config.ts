@@ -11,4 +11,30 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              return 'vendor-react';
+            }
+            if (id.includes('gsap')) {
+              return 'vendor-gsap';
+            }
+            if (id.includes('react-icons') || id.includes('@tabler')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('motion') || id.includes('framer')) {
+              return 'vendor-motion';
+            }
+            if (id.includes('hls.js')) {
+              return 'vendor-hls';
+            }
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 400,
+  },
 })

@@ -15,7 +15,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-background">
       {/* ── Background Video (HLS stream) ── */}
-      <SectionVideoBackground src={HERO_VIDEO} className="z-0" autoPlay />
+      <SectionVideoBackground src={HERO_VIDEO} className="z-0" autoPlay zoom={1.25} />
 
       {/* ── Navigation ── */}
       <nav className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">

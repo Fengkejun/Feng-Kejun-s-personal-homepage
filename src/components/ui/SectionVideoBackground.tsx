@@ -10,6 +10,7 @@ interface SectionVideoBackgroundProps {
   className?: string;
   autoPlay?: boolean;
   scrollZoom?: boolean;
+  zoom?: number;
 }
 
 export default function SectionVideoBackground({
@@ -18,6 +19,7 @@ export default function SectionVideoBackground({
   className = "",
   autoPlay = false,
   scrollZoom = false,
+  zoom = 1,
 }: SectionVideoBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -157,6 +159,7 @@ export default function SectionVideoBackground({
         playsInline
         preload="auto"
         className="section-video absolute inset-0 w-full h-full object-cover will-change-transform"
+        style={{ transform: zoom > 1 ? `scale(${zoom})` : undefined }}
       />
     </div>
   );

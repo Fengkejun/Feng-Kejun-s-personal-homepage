@@ -72,6 +72,20 @@ export default function FooterSection() {
           &copy; {new Date().getFullYear()} {profile.name}. All rights reserved.
         </div>
 
+        {/* 备案信息 */}
+        <div className="flex flex-col items-center gap-1.5 text-[11px]">
+          <a
+            href="https://beian.miit.gov.cn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/30 hover:text-white/60 transition-colors"
+          >
+            皖ICP备2026027645号-2
+          </a>
+          {/* 公安联网备案号：审核通过后由公安下发（格式「皖公网安备 3XXXXXXXXXXX 号」），拿到后在此处加一行同款链接，
+              href="https://beian.mps.gov.cn/" */}
+        </div>
+
         {/* Built with */}
         <div className="flex items-center gap-2 text-white/25 text-[11px]">
           <span>Built with</span>

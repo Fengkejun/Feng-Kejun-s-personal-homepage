@@ -6,7 +6,7 @@ export const profile = {
   avatar: avatarImg,
   tagline: "用心写好每一行代码，用技术创造价值",
   roles: ["前端开发工程师", "Vue3/React开发者", "跨平台开发者", "鸿蒙开发者"],
-  bio: "1年前端开发经验，熟练掌握 Vue3/React/TypeScript 技术栈，具备从0到1构建桌面端、移动端、小程序、大屏可视化等多端应用的能力。熟悉 uni-app 跨平台开发、Tauri 桌面端方案、Flutter/鸿蒙应用开发。善于运用 AI 编程工具提升研发效能，注重代码质量与用户体验。",
+  bio: "3年前端开发经验，熟练掌握 Vue3/React/TypeScript 技术栈，具备从0到1构建桌面端、移动端、小程序、大屏可视化等多端应用的能力。熟悉 uni-app 跨平台开发、Tauri 桌面端方案、Flutter/鸿蒙应用开发。善于运用 AI 编程工具提升研发效能，注重代码质量与用户体验。",
   phone: "17682189224",
   email: "17682189224@163.com",
   age: 26,
@@ -15,8 +15,6 @@ export const profile = {
   socials: [
     { name: "GitHub", url: "https://github.com/Fengkejun", icon: "github" },
     { name: "Email", url: "mailto:17682189224@163.com", icon: "email" },
-    { name: "LinkedIn", url: "https://linkedin.com/in/fengkejun", icon: "linkedin" },
-    { name: "Twitter", url: "https://twitter.com/fengkejun", icon: "twitter" },
   ],
   contact: {
     email: "17682189224@163.com",
@@ -259,7 +257,7 @@ export const articles = [
 
 export const aboutItems = [
   {
-    title: "1年前端开发经验",
+    title: "3年前端开发经验",
     description: "从 Vue2 到 Vue3+TypeScript，从移动端到桌面端，积累丰富的多端开发实战经验。",
     className: "md:col-span-2",
   },

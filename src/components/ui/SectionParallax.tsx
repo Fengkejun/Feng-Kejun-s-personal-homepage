@@ -309,7 +309,7 @@ function ContactLayer2() {
         <GlassBlock className="w-[150px]">
           <div className="text-[9px] text-muted-foreground font-mono mb-2 tracking-wider">NETWORK</div>
           <div className="space-y-1.5">
-            {["Email", "GitHub", "LinkedIn"].map((n) => (
+            {["Email", "GitHub"].map((n) => (
               <div key={n} className="flex items-center gap-2 text-[10px]">
                 <div className="w-1.5 h-1.5 rounded-full bg-indigo-400/50" />
                 <span className="text-muted-foreground/50">{n}</span>
@@ -352,7 +352,6 @@ function ContactLayer3() {
         <GlassBlock className="w-[170px] font-mono text-[10px]">
           <div className="text-[9px] text-muted-foreground mb-1 tracking-wider">CONNECT</div>
           <div className="text-foreground/40">GitHub → /Fengkejun</div>
-          <div className="text-foreground/35">LinkedIn → /in/fengkejun</div>
         </GlassBlock>
       </div>
     </>
